@@ -1,7 +1,14 @@
 # Exercicio 01
 def max_consecutive_sum(nums):
-    # implementar a solução aqui
-    pass
+    maior = nums[0]
+    for i in range(len(nums)):
+        pivo = nums[i]
+        soma = nums[i]
+        for j in range(i + 1, len(nums)):
+            pivo += nums[j]
+            soma = max(pivo, soma)
+        maior = max(maior, soma)
+    return maior
 
 # Testes 01
 def test_max_consecutive_sum():
@@ -14,8 +21,11 @@ def test_max_consecutive_sum():
 
 # Exercício 02
 def is_palindrome(word):
-    # implementar a solução aqui
-    pass
+    inverse = word[::-1]
+    if (inverse == word):
+      return True
+    else:
+      return False
 
 # Testes 02
 def text_is_palindrome():
@@ -31,8 +41,19 @@ def text_is_palindrome():
 
 # Exercício 03
 def count_increasing_subsets(nums):
-    # implementar a solução aqui
-    pass
+    def backtrack(start, subset):
+        nonlocal count
+        if len(subset) > 0:
+            count += 1
+        for i in range(start, len(nums)):
+            if not subset or nums[i] > subset[-1]:
+                backtrack(i + 1, subset + [nums[i]])
+
+    count = 0
+    # Remover valores duplicados da lista
+    nums = sorted(set(nums))
+    backtrack(0, [])
+    return count
 
 # Testes 03
 def test_count_increasing_subsets():
